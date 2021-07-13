@@ -24,6 +24,7 @@
   /* Type */
   --headingFont: "Abril Fatface", sans-serif;
   --bodyFont: "Abril Fatface", sans-serif;
+  --baseFontSize: 100%;
   --h1: 3.052em;
   --h2: 2.441em;
   --h3: 1.953em;
@@ -39,12 +40,23 @@
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --level-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Positioning */
+  --containerPadding: 2.5%;
+  --headerHeight: 3rem;
 }
 
 /* FROM type-scale.com */
 html {
-  font-size: 100%;
-} /*16px*/
+  font-size: var(--baseFontSize);
+  box-sizing: border-box;
+} /*18px*/
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 
 body {
   font-family: var(--bodyFont);
@@ -52,6 +64,34 @@ body {
   line-height: 1.75;
   color: #000000;
   padding-bottom: 300px;
+  background: var(--background);
+  color: var(--textColor);
+}
+
+header {
+  --headerBackground: var(--darkBlue);
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: var(--headerHeight);
+  background: var(--headerBackground);
+  box-shadow: var(--level-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--containerPadding);
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+}
+
+header nav a + a {
+  /* the '+' operator means the thing next to the thing */
+  margin-left: 10px;
 }
 
 p {
@@ -71,7 +111,7 @@ h2,
 h3,
 h4,
 h5 {
-  margin: 3rem 0 1.38em;
+  margin: 1em 0 1.38em;
   font-family: var(--headingFont);
   font-weight: 400;
   line-height: 1.3;
@@ -103,11 +143,6 @@ small,
   font-size: var(--smallText);
 }
 /* End type-scale.com */
-
-body {
-  background: var(--background);
-  color: var(--textColor);
-}
 
 .dark {
   --background: var(--black);
@@ -182,13 +217,13 @@ button.small {
 }
 
 .layout {
-  margin: 0 auto;
-  width: 95%;
+  /* adds top padding header height + additional padding that we want */
+  padding: calc(2rem + var(--headerHeight)) var(--containerPadding);
 }
 
 .grid {
   --gridCols: 2;
-  display: grid;
+  display: block;
   grid-template-columns: repeat(var(--gridCols), 1fr);
 }
 
@@ -198,10 +233,28 @@ button.small {
 
 .flex {
   --justifyContent: space-between;
-  display: flex;
+  display: block;
   justify-content: var(--justifyContent);
 }
 
 .flex-around {
   --justifyContent: space-around;
+}
+
+/* Cannot use css var in media queries :( */
+@media only screen and (min-width: 501px) {
+  :root {
+    --baseFontSize: 112.5%;
+  }
+  .grid {
+    display: grid;
+  }
+  .flex {
+    display: flex;
+  }
+}
+
+.fake-logo {
+  font-size: var(--baseFontSize);
+  margin: 0;
 }
