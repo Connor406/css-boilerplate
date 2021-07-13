@@ -10,6 +10,7 @@
   --darkBlue: #00214d;
   --grey: #bfbfbf;
   --lightGrey: #f2f4f6;
+  --white: #fff;
 
   /* NEXT => define color's intentions */
   --primary: var(--green);
@@ -17,6 +18,7 @@
   --background: var(--lightGrey);
   --textColor: var(--black);
   --lineColor: var(--grey);
+  --cardBg: var(--white);
 
   /* Styles */
   --line: solid 1px var(--lineColor);
@@ -44,6 +46,7 @@
   /* Positioning */
   --containerPadding: 2.5%;
   --headerHeight: 3rem;
+  --borderRadius: 10px;
 }
 
 /* FROM type-scale.com */
@@ -63,7 +66,6 @@ body {
   font-weight: 400;
   line-height: 1.75;
   color: #000000;
-  padding-bottom: 300px;
   background: var(--background);
   color: var(--textColor);
 }
@@ -94,8 +96,25 @@ header nav a + a {
   margin-left: 10px;
 }
 
+footer {
+  --footerTextColor: var(--lightGrey);
+  color: var(--footerTextColor);
+  background: var(--black);
+  padding: 2rem var(--containerPadding);
+  text-align: center;
+}
+
+footer a {
+  color: var(--footerTextColor);
+}
+
+footer p {
+  margin-bottom: 0;
+  max-width: none;
+}
+
 p {
-  margin-bottom: 1em;
+  margin-bottom: 1.15em;
   max-width: 40em;
 }
 
@@ -152,7 +171,7 @@ small,
 blockquote {
   margin: 10px;
   padding: 2em;
-  background: white;
+  background: var(--cardBg);
   box-shadow: var(--level-3);
 }
 
@@ -257,4 +276,21 @@ button.small {
 .fake-logo {
   font-size: var(--baseFontSize);
   margin: 0;
+}
+
+.card {
+  padding: 2em;
+  background: var(--cardBg);
+  box-shadow: var(--level-3);
+  border-radius: var(--borderRadius);
+}
+
+/* accesses first item inside of card */
+.card > *:first-child {
+  margin-top: 0;
+}
+
+/* last item in card */
+.card > *:last-child {
+  margin-bottom: 0;
 }
